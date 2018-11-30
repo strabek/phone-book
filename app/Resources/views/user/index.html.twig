@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Phonebook</h1>
+
+    <a class="btn btn-success" href="{{ path('user_new') }}"><i class="fas fa-user-plus fa-flip-horizontal"></i></a>
+    <form class="float-right" method="GET" action="{{ path('search') }}">
+      <div class="form-row align-items-center">
+        <div class="col-auto">
+          <input type="text" class="form-control mb-2" id="inlineFormInput" name="query" placeholder="Name or phone number">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-2">Search</button>
+        </div>
+      </div>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Created</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{% if user.createdAt %}{{ user.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('user_show', { 'id': user.id }) }}" role="button" title="Details"><i class="fas fa-eye"></i></a>
+                        <a class="btn btn-secondary" href="{{ path('user_edit', { 'id': user.id }) }}" role="button" title="Update"><i class="fas fa-pen-square"></i></a>
+                        <a class="btn btn-warning" href="{{ path('phonenumber_new', { 'userId': user.id }) }}" role="button" title="Add phone number"><i class="fas fa-phone-square"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 pag-nav">
+            {{ knp_pagination_render(users) }}
+        </div>
+    </div>
+{% endblock %}

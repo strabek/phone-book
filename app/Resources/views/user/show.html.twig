@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    <h1>Details:</h1>
+    <table>
+        <tbody>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ user.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ user.lastName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Phone numbers:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">number</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for phoneNumber in phoneNumbers %}
+            <tr>
+                <td scope="row">{{ phoneNumber.name }}</td>
+                <td scope="row">{{ phoneNumber.number }}</td>
+                <td scope="row">
+                    <a class="btn btn-secondary" href="{{ path('phonenumber_edit', { 'id': phoneNumber.id }) }}" role="button">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 pag-nav">
+            {{ knp_pagination_render(phoneNumbers) }}
+        </div>
+    </div>
+    <a class="btn btn-primary" href="{{ path('homepage') }}">Back to the phonebook</a>
+    <a class="btn btn-warning" href="{{ path('phonenumber_new', { 'userId': user.id }) }}" role="button">Add phone number</a>
+{% endblock %}

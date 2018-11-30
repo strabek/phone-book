@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <h5 class="card-header">Add a phone number</h5>
+        <div class="card-body">
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <input class="btn btn-success" type="submit" value="Add" />
+                <a class="btn btn-secondary" href="{{ path('homepage') }}">Cancel</a>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

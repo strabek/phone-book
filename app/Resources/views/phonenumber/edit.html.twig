@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <h5 class="card-header">Update phone number</h5>
+        <div class="card-body">
+            {{ form_start(edit_form) }}
+                {{ form_widget(edit_form) }}
+                <input class="btn btn-success" type="submit" value="Update" />
+                <a class="btn btn-secondary" href="{{ path('user_show', { 'id': userId }) }}">Cancel</a>
+            {{ form_end(edit_form) }}
+
+            {{ form_start(delete_form) }}
+                <button class="btn btn-danger" type="submit" value="Delete"><i class="fas fa-trash-alt"></i></button>
+            {{ form_end(delete_form) }}
+        </div>
+    </div>
+{% endblock %}

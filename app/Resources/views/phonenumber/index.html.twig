@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Phonenumbers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Number</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for phoneNumber in phoneNumbers %}
+            <tr>
+                <td><a href="{{ path('phonenumber_show', { 'id': phoneNumber.id }) }}">{{ phoneNumber.id }}</a></td>
+                <td>{{ phoneNumber.number }}</td>
+                <td>{% if phoneNumber.createdAt %}{{ phoneNumber.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if phoneNumber.updatedAt %}{{ phoneNumber.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('phonenumber_show', { 'id': phoneNumber.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('phonenumber_edit', { 'id': phoneNumber.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('phonenumber_new') }}">Create a new phoneNumber</a>
+        </li>
+    </ul>
+{% endblock %}
